@@ -1,9 +1,10 @@
 import {Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, TextField , DialogActions} from "@mui/material"
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useValue } from '../../Context/ContexProvider'
-import { Close } from "@mui/icons-material";
+import { Close , Send} from "@mui/icons-material";
 import PasswordField from "./PasswordField";
 import {Button} from "@mui/material"
+import GoogleOneTap from "./GoogleOneTap";
 
 const Login = () => {
 
@@ -24,7 +25,25 @@ const Login = () => {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
+
+        //testing loading
+        dispatch({type:'START_LOADING'})
+
+        setTimeout(()=>{
+          dispatch({ type: 'END_LOADING' });
+              }, 6000);
+
+        //testing notification
+        const Password = passwordRef.current.value 
+        const confirmPassword = confirmPasswordRef.current.value
+        if(Password !== confirmPassword){
+          dispatch({type:'UPDATE_ALERT',payload:{open:true,severity:'error',message:'Password do not match'}})
+        }
     }
+
+    useEffect(()=>{
+      isRegister?setTitle("Register"):setTitle("Login")
+    },[isRegister])
   return (
     <Dialog
     open={openLogin}
@@ -53,7 +72,13 @@ const Login = () => {
                         id="confirmPassword"
                         label="Confirm Password"/>)}
                 </DialogContent>
-                <DialogActions sx={{ justifyContent: 'left', p: '5px 24px' }}>
+                <DialogActions sx={{ px: '19px' }}>
+                    <Button type="submit" variant="contained" endIcon={<Send />}>
+                        Submit
+                    </Button>
+                </DialogActions>
+         </form>
+         <DialogActions sx={{ justifyContent: 'left', p: '5px 24px' }}>
                     {isRegister
                         ? 'Do you have an account? Sign in now '
                         : "Don't you have an account? Create one now "}
@@ -61,8 +86,9 @@ const Login = () => {
                         {isRegister ? 'Login' : 'Register'}
                     </Button>
                 </DialogActions>
-
-        </form>
+                <DialogActions sx={{justifyContent:'center',py:'24px'}}>
+                   <GoogleOneTap />
+                </DialogActions>
     </Dialog>
 
     
