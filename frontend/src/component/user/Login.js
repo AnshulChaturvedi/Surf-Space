@@ -62,7 +62,7 @@ const Login = () => {
                     {isRegister && <TextField autoFocus margin="normal" variant="standard" id="name" label="Name" 
                     type="text" fullWidth inputRef={nameRef} inputProps={{minLength:2}} required  />}
                     <TextField autoFocus={!isRegister} margin="normal" variant="standard" id="email" label="Email" 
-                    type="email" fullWidth inputRef={nameRef} inputProps={{minLength:2}} required  />
+                    type="email" fullWidth inputRef={emailRef} inputProps={{minLength:2}} required  />
 
 
                   <PasswordField {...{ passwordRef }} />
