@@ -4,10 +4,34 @@ import React from 'react';
 import { useValue } from '../../Context/ContexProvider';
 
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
-  const { dispatch } = useValue();
+  const { dispatch ,
+    state:{currentUser}
+  } = useValue();
+  
   const handleCloseUserMenu = () => {
     setAnchorUserMenu(null);
   };
+
+  const testAuthorization = async() =>{
+    const url = process.env.REACT_APP_SERVER_URL+ '/room';
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${currentUser.token}`,
+        },
+      });
+      const data = await response.json();
+      console.log(data)
+      if(!data.success){
+        throw new Error(data.message)
+      }
+    } catch (error) {
+      dispatch({type:'UPDATE_ALERT',payload:{open:true,severity:'error',message:error.message}})
+      console.log(error)
+    }
+  }
 
   return (
     <Menu
@@ -16,7 +40,7 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
       onClose={handleCloseUserMenu}
       onClick={handleCloseUserMenu}
     >
-      <MenuItem>
+      <MenuItem onClick={testAuthorization}>
         <ListItemIcon>
           <Settings fontSize="small" />
         </ListItemIcon>
