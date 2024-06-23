@@ -16,7 +16,7 @@ const testAuthorization = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${currentUser.token}t`,
+        authorization: `Bearer ${currentUser.token}`,
       },
     });
     const data = await response.json();
