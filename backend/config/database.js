@@ -1,16 +1,20 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
-//database connection
-require("dotenv").config();
 
-const connectDB = () => {
-    mongoose.connect(process.env.DATABASE, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false
-    }).then(() => console.log("Databse connected Successfully"))
-    .catch((err) => console.log(err));
-}
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.DATABASE, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false
+        });
+        console.log("Database connected Successfully");
+    } catch (err) {
+        console.error(err);
+    }
+};
 
-module.exports = connectDB;
+export default connectDB;
