@@ -45,7 +45,6 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
       onClick={handleCloseUserMenu}
     >
       <MenuItem onClick={testAuthorization}>
-      <MenuItem onClick={testAuthorization}>
         <ListItemIcon>
           <Settings fontSize="small" />
         </ListItemIcon>
