@@ -5,6 +5,8 @@ import { Close , Send} from "@mui/icons-material";
 import PasswordField from "./PasswordField";
 import {Button} from "@mui/material"
 import GoogleOneTap from "./GoogleOneTap";
+import { register , login } from "../../actions/user";
+
 
 const Login = () => {
 
@@ -26,19 +28,18 @@ const Login = () => {
     const handleSubmit=(e)=>{
         e.preventDefault();
 
-        //testing loading
-        dispatch({type:'START_LOADING'})
-
-        setTimeout(()=>{
-          dispatch({ type: 'END_LOADING' });
-              }, 6000);
-
-        //testing notification
-        const Password = passwordRef.current.value 
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        //send login request if it is not register and return 
+        if(!isRegister) return login({email,password},dispatch)
+        const name = nameRef.current.value
         const confirmPassword = confirmPasswordRef.current.value
-        if(Password !== confirmPassword){
-          dispatch({type:'UPDATE_ALERT',payload:{open:true,severity:'error',message:'Password do not match'}})
-        }
+        if(password !== confirmPassword)
+            return dispatch({type:'UPDATE_ALERT',
+              payload:{open:true,severity:'error',message:'Password does not match',},
+            })
+        //send register request
+        register({name,email,password},dispatch)
     }
 
     useEffect(()=>{
