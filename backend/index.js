@@ -23,7 +23,7 @@ app.use(express.json({limit:'10mb'}))
 app.use('/user',userRouter)
 app.use('/room',roomRouter);
 
-app.use('/',(req,res)=>res.json({message:'Welcome to our API'}))
+app.get('/',(req,res)=>res.json({message:'Welcome to our API'}))
 app.use((req,res) =>res.status(404).json({sucess:false,message:'Not Found'}))
 
 

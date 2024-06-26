@@ -8,6 +8,7 @@ const initialState ={
     openLogin:false,
     loading:false,
     alert:{open:false,severity:'info',message:''},
+    profile:{open:false,file:null,photURL:''},
 }
 
 const Context  = createContext(initialState)
