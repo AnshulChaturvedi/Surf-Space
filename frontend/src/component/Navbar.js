@@ -22,7 +22,8 @@ const NavBar = () => {
   } = useValue();
 
   return (
-    <AppBar>
+    <>
+      <AppBar>
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Box sx={{ mr: 1 }}>
@@ -60,6 +61,9 @@ const NavBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    <Toolbar />
+    </>
+    
   );
 };
 

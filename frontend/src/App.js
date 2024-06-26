@@ -3,6 +3,7 @@ import Navbar from './component/Navbar'
 import Login from './component/user/Login'
 import Notification from './component/Notification'
 import Loading from './component/Loading'
+import BottomNav from './component/BottomNav'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
     <Notification />
     <Navbar/>
     <Login/>
+    <BottomNav/>
   </>
   )
    
