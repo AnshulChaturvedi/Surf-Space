@@ -18,7 +18,7 @@ const BottomNav = () => {
     },{value})
     
     return (
-      <Box >
+      <Box ref={ref}>
            {{
              0: <ClusterMap/>,
              1: <Room />,
