@@ -12,6 +12,7 @@ import {
   import { Close, Send } from '@mui/icons-material';
   import { useValue } from '../../Context/ContexProvider';
   import { useRef } from 'react';
+import { updateProfile } from '../../actions/user.js';
   
   
   const Profile = () => {
@@ -37,6 +38,10 @@ import {
     };
     const handleSubmit = (e) => {
       e.preventDefault();
+      const name = nameRef.current.value;
+      //pass usr name and photo to user function in user action
+      updateProfile(currentUser,{name,file:profile.file},dispatch)
+
       
     };
     return (
