@@ -19,9 +19,15 @@ const Reducer = (state, action) => {
                 ...state,
                 images: state.images.filter((image) => image !== action.payload),
             };
+        
         case 'UPDATE_USER':
             localStorage.setItem('currentUser', JSON.stringify(action.payload));
             return { ...state, currentUser: action.payload };
+
+        case 'UPDATE_DETAILS':
+            return { ...state, details: { ...state.details, ...action.payload } };
+        
+        
         default:
             console.error(`No matched action: ${action.type}`);
             return state;
