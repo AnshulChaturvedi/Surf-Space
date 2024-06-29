@@ -7,6 +7,7 @@ import ReactMapGL, {
 import { useValue } from '../../../Context/ContexProvider';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
+import Geocoder from './Geocoder';
 
 const AddLocation = () => {
   const {
@@ -73,6 +74,7 @@ const AddLocation = () => {
             })
           }
         />
+        <Geocoder />
       </ReactMapGL>
     </Box>
   );
