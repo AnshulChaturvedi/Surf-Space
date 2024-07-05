@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+} from 'react';
 import reducer from './Reducer';
 
 const initialState = {
@@ -10,6 +16,7 @@ const initialState = {
   images: [],
   details: { title: '', description: '', price: 0 },
   location: { lng: 0, lat: 0 },
+  rooms: [],
 };
 
 const Context = createContext(initialState);
@@ -20,21 +27,15 @@ export const useValue = () => {
 
 const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const mapRef = useRef();
   useEffect(() => {
-    const currentUserString = localStorage.getItem('currentUser');
-    if (currentUserString) {
-      try {
-        const currentUser = JSON.parse(currentUserString);
-        dispatch({ type: 'UPDATE_USER', payload: currentUser });
-      } catch (error) {
-        console.error('Failed to parse currentUser from localStorage', error);
-      }
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      dispatch({ type: 'UPDATE_USER', payload: currentUser });
     }
   }, []);
-
   return (
-    <Context.Provider value={{ state, dispatch }}>
+    <Context.Provider value={{ state, dispatch, mapRef }}>
       {children}
     </Context.Provider>
   );
