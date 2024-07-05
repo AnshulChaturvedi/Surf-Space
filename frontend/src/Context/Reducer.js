@@ -41,6 +41,8 @@ const Reducer = (state, action) => {
         case 'UPDATE_ROOMS':
             return { ...state, rooms: action.payload};
         
+        case 'FILTER_PRICE':
+            return { ...state, priceFilter: action.payload};
 
         default:
             console.error(`No matched action: ${action.type}`);
